@@ -21,6 +21,7 @@ jobs:
         - chmod 777 gradlew
       script: ./gradlew clean build
       before_deploy:
+        - chmod 777 gradlew
         - git config --local user.name "Travis CI"
         - git config --local user.email "travis@example.com"
         - git tag -f $RELEASE_TAG
@@ -44,6 +45,7 @@ jobs:
       before_deploy:
         - echo "Deploying $RELEASE_TAG to Cloud Foundry"
       before_script:
+        - chmod 777 gradlew
         - cf login -a $CF_API_URL -u $CF_USERNAME -p $CF_PASSWORD -o $CF_ORG -s $CF_SPACE
         - scripts/migrate-databases.sh pal-tracker .
       deploy:
